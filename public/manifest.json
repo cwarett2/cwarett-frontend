@@ -1,0 +1,23 @@
+{
+  "name": "CWARETT.TN - Comptes Premium",
+  "short_name": "CWARETT",
+  "description": "Vos comptes premium Netflix, ChatGPT et plus aux meilleurs prix en Tunisie",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0F0F23",
+  "theme_color": "#8B5CF6",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["business", "shopping", "entertainment"],
+  "lang": "fr"
+}
