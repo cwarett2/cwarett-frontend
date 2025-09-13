@@ -131,7 +131,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             <div className="hidden md:flex items-center space-x-4">
               <CartDrawer />
               <Button variant="hero" size="sm" asChild>
-                <Link to="/contact">Commander maintenant</Link>
+                <Link to="/services">Commander maintenant</Link>
               </Button>
             </div>
 
