@@ -14,7 +14,7 @@ import { isAdminAuthenticated } from '@/components/AdminAuth';
 import { APP_CONFIG } from '@/config/constants';
 
 // ✅ Import your logo
-import Logo from '@/components/Logo.png';
+import Logo from '@/components/logo.png';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
