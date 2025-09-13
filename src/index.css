@@ -1,0 +1,215 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* Modern Agency Design System for Digital Services */
+
+@layer base {
+  :root {
+    /* Core Colors */
+    --background: 210 20% 6%;
+    --foreground: 210 40% 98%;
+
+    --card: 210 20% 8%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 210 20% 8%;
+    --popover-foreground: 210 40% 98%;
+
+    /* Brand Colors */
+    --primary: 260 84% 65%;
+    --primary-foreground: 210 40% 98%;
+    
+    --secondary: 210 20% 12%;
+    --secondary-foreground: 210 40% 98%;
+
+    --accent: 28 90% 65%;
+    --accent-foreground: 210 40% 98%;
+
+    --success: 142 71% 45%;
+    --success-foreground: 210 40% 98%;
+
+    --netflix: 0 100% 50%;
+    --netflix-foreground: 210 40% 98%;
+
+    --muted: 210 20% 15%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 210 20% 18%;
+    --input: 210 20% 18%;
+    --ring: 260 84% 65%;
+
+    --radius: 0.75rem;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(260 84% 65%) 0%, hsl(240 84% 70%) 50%, hsl(220 84% 75%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(210 20% 8% / 0.8) 0%, hsl(210 20% 12% / 0.6) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(28 90% 65%) 0%, hsl(40 90% 70%) 100%);
+    --gradient-success: linear-gradient(135deg, hsl(142 71% 45%) 0%, hsl(160 71% 50%) 100%);
+    
+    /* Glass Effects */
+    --glass-bg: hsl(210 20% 8% / 0.1);
+    --glass-border: hsl(210 40% 98% / 0.1);
+    --glass-backdrop: blur(20px);
+
+    /* Shadows */
+    --shadow-glow: 0 0 50px hsl(260 84% 65% / 0.3);
+    --shadow-card: 0 10px 30px -10px hsl(210 20% 0% / 0.5);
+    --shadow-accent: 0 10px 30px -10px hsl(28 90% 65% / 0.3);
+
+    /* Animation */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --sidebar-background: 210 20% 8%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 260 84% 65%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 210 20% 12%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 210 20% 18%;
+    --sidebar-ring: 260 84% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@layer utilities {
+  /* Glass Effect */
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-backdrop);
+    border: 1px solid var(--glass-border);
+  }
+
+  /* Gradients */
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .gradient-card {
+    background: var(--gradient-card);
+  }
+
+  .gradient-accent {
+    background: var(--gradient-accent);
+  }
+
+  .gradient-success {
+    background: var(--gradient-success);
+  }
+
+  /* Shadows */
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .shadow-accent {
+    box-shadow: var(--shadow-accent);
+  }
+
+  /* Animation Classes */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out;
+  }
+
+  /* Spin Animation */
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  .animate-spin-slow {
+    animation: spin 1.5s linear infinite;
+  }
+
+  /* Hover Effects */
+  .hover-lift {
+    transition: var(--transition-smooth);
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-8px);
+  }
+
+  .hover-scale {
+    transition: var(--transition-bounce);
+  }
+  
+  .hover-scale:hover {
+    transform: scale(1.05);
+  }
+
+  .hover-glow {
+    transition: var(--transition-smooth);
+  }
+  
+  .hover-glow:hover {
+    box-shadow: var(--shadow-glow);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 20px hsl(260 84% 65% / 0.2);
+  }
+  to {
+    box-shadow: 0 0 40px hsl(260 84% 65% / 0.4);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
