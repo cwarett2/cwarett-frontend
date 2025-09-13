@@ -127,28 +127,26 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               )}
             </div>
 
-            {/* Desktop CTA */}
-<div className="hidden md:flex items-center space-x-4">
-  <CartDrawer />
-  <Button variant="hero" size="sm" asChild>
-    <Link to="/services">Commander maintenant</Link>
-  </Button>
-</div>
+            {/* CTA Button */}
+            <div className="hidden md:flex items-center space-x-4">
+              <CartDrawer />
+              <Button variant="hero" size="sm" asChild>
+                <Link to="/services">Commander maintenant</Link>
+              </Button>
+            </div>
 
-{/* Mobile Actions */}
-<div className="flex items-center space-x-3 md:hidden">
-  {/* ✅ Cart always visible on mobile */}
-  <CartDrawer />
-  
-  {/* Hamburger menu button */}
-  <Button
-    variant="ghost"
-    size="icon"
-    onClick={() => setIsMenuOpen(!isMenuOpen)}
-  >
-    {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-  </Button>
-</div>
+            {/* Mobile Cart and Menu Button */}
+            <div className="md:hidden flex items-center space-x-2">
+              <CartDrawer />
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+              >
+                {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              </Button>
+            </div>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
@@ -202,9 +200,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 </Link>
               )}
               
-              <div className="pt-2">
-                <CartDrawer />
-              </div>
               <Button variant="hero" size="sm" className="w-full" asChild>
                 <Link to="/contact">Commander maintenant</Link>
               </Button>
