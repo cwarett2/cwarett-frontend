@@ -2,9 +2,8 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Slider } from '@/components/ui/slider';
 import { ProductCard } from '@/components/ProductCard';
 import { useProducts } from '@/hooks/useProducts';
 import { SEOHead } from '@/components/SEOHead';
@@ -21,45 +20,14 @@ import {
   Zap,
   Download,
   Globe,
-  Filter,
+  Search,
   X
 } from 'lucide-react';
 import React from 'react';
 
 const Services = () => {
   const { products, loading: productsLoading } = useProducts();
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [priceRange, setPriceRange] = useState([0, 120]);
-  const [sortBy, setSortBy] = useState('popular');
-
-
-  const categories = [
-    { value: 'all', label: 'Toutes les catégories' },
-  ];
-
-  // Get dynamic categories from products
-  const dynamicCategories = React.useMemo(() => {
-    const categorySet = new Set<string>();
-    products.forEach(product => {
-      if (product.category) {
-        categorySet.add(product.category);
-      }
-    });
-    
-    const dynamicCats = Array.from(categorySet).sort().map(cat => ({
-      value: cat.toLowerCase().replace(/\s+/g, '-'),
-      label: cat
-    }));
-    
-    return [{ value: 'all', label: 'Toutes les catégories' }, ...dynamicCats];
-  }, [products]);
-
-  const sortOptions = [
-    { value: 'popular', label: 'Plus populaires' },
-    { value: 'price-low', label: 'Prix croissant' },
-    { value: 'price-high', label: 'Prix décroissant' },
-    { value: 'name', label: 'Nom A-Z' }
-  ];
+  const [searchQuery, setSearchQuery] = useState('');
 
   const guarantees = [
     {
@@ -79,47 +47,33 @@ const Services = () => {
     }
   ];
 
-  // Map category values to display names
-  const getCategoryName = (categorySlug: string) => {
-    const categoryMap: { [key: string]: string } = {
-      'streaming': 'Streaming & Divertissement',
-      'ai': 'Intelligence Artificielle', 
-      'tools': 'Outils Professionnels',
-      'other': 'Autre'
-    };
-    return categoryMap[categorySlug] || categorySlug;
-  };
-
-  // Apply filters
+  // Apply search filter
   const filteredServices = products.filter(product => {
-    const matchesCategory = selectedCategory === 'all' || 
-      product.category.toLowerCase().replace(/\s+/g, '-') === selectedCategory;
-    const matchesPrice = product.price >= priceRange[0] && product.price <= priceRange[1];
-    return matchesCategory && matchesPrice;
+    if (!searchQuery.trim()) return true;
+    
+    const query = searchQuery.toLowerCase();
+    return (
+      product.name.toLowerCase().includes(query) ||
+      product.description.toLowerCase().includes(query) ||
+      product.category.toLowerCase().includes(query) ||
+      product.features.some(feature => feature.toLowerCase().includes(query))
+    );
   });
 
-  // Apply sorting
+  // Sort by popular first, then alphabetically
   const sortedServices = [...filteredServices].sort((a, b) => {
-    switch (sortBy) {
-      case 'price-low':
-        return a.price - b.price;
-      case 'price-high':
-        return b.price - a.price;
-      case 'name':
-        return a.name.localeCompare(b.name);
-      case 'popular':
-      default:
-        return (b.popular ? 1 : 0) - (a.popular ? 1 : 0);
-    }
+    // Popular products first
+    if (a.popular && !b.popular) return -1;
+    if (!a.popular && b.popular) return 1;
+    // Then alphabetically
+    return a.name.localeCompare(b.name);
   });
 
-  const clearFilters = () => {
-    setSelectedCategory('all');
-    setPriceRange([0, 120]);
-    setSortBy('popular');
+  const clearSearch = () => {
+    setSearchQuery('');
   };
 
-  const hasActiveFilters = selectedCategory !== 'all' || priceRange[0] !== 0 || priceRange[1] !== 120 || sortBy !== 'popular';
+  const hasActiveSearch = searchQuery.trim() !== '';
 
   return (
     <div className="min-h-screen">
@@ -130,167 +84,6 @@ const Services = () => {
       />
       
       {/* Header */}
-       <section className="py-8 bg-card/30 border-y border-border">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Filter className="h-5 w-5 text-primary" />
-              <h2 className="text-lg font-semibold">Filtres</h2>
-              {hasActiveFilters && (
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={clearFilters}
-                  className="text-muted-foreground hover:text-foreground"
-                >
-                  <X className="h-4 w-4 mr-1" />
-                  Effacer
-                </Button>
-              )}
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
-              {/* Category Filter */}
-              <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium text-muted-foreground">Catégorie</label>
-                <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                  <SelectTrigger className="w-full sm:w-[200px]">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {dynamicCategories.map((category) => (
-                      <SelectItem key={category.value} value={category.value}>
-                        {category.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              {/* Price Range Filter */}
-              <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium text-muted-foreground">
-                  Prix: {priceRange[0]} - {priceRange[1]} TND
-                </label>
-                <div className="w-full sm:w-[200px] px-3">
-                  <Slider
-                    value={priceRange}
-                    onValueChange={setPriceRange}
-                    max={120}
-                    min={0}
-                    step={5}
-                    className="w-full"
-                  />
-                </div>
-              </div>
-
-              {/* Sort Filter */}
-              <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium text-muted-foreground">Trier par</label>
-                <Select value={sortBy} onValueChange={setSortBy}>
-                  <SelectTrigger className="w-full sm:w-[180px]">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {sortOptions.map((option) => (
-                      <SelectItem key={option.value} value={option.value}>
-                        {option.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-          </div>
-
-          {/* Active Filters Display */}
-          {hasActiveFilters && (
-            <div className="flex flex-wrap gap-2 mt-4">
-              {selectedCategory !== 'all' && (
-                <Badge variant="secondary" className="flex items-center gap-1">
-                  {dynamicCategories.find(c => c.value === selectedCategory)?.label}
-                  <button
-                    onClick={() => setSelectedCategory('all')}
-                    className="ml-1 hover:bg-muted rounded-full p-0.5"
-                  >
-                    <X className="h-3 w-3" />
-                  </button>
-                </Badge>
-              )}
-              {(priceRange[0] !== 0 || priceRange[1] !== 120) && (
-                <Badge variant="secondary" className="flex items-center gap-1">
-                  {priceRange[0]} - {priceRange[1]} TND
-                  <button
-                    onClick={() => setPriceRange([0, 120])}
-                    className="ml-1 hover:bg-muted rounded-full p-0.5"
-                  >
-                    <X className="h-3 w-3" />
-                  </button>
-                </Badge>
-              )}
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* Services Results */}
-      <section className="py-16">
-        <div className="container mx-auto px-4 lg:px-8">
-          {!productsLoading && (
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-2xl font-bold">
-                {filteredServices.length} service{filteredServices.length > 1 ? 's' : ''} trouvé{filteredServices.length > 1 ? 's' : ''}
-              </h2>
-            </div>
-          )}
-
-          {productsLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[1, 2, 3, 4, 5, 6].map((i) => (
-                <Card key={i} className="gradient-card border-border animate-pulse">
-                  <CardContent className="p-6">
-                    <div className="h-20 bg-muted rounded mb-4"></div>
-                    <div className="h-8 bg-muted rounded mb-2"></div>
-                    <div className="h-4 bg-muted rounded mb-4"></div>
-                    <div className="space-y-2 mb-6">
-                      <div className="h-4 bg-muted rounded"></div>
-                      <div className="h-4 bg-muted rounded"></div>
-                      <div className="h-4 bg-muted rounded"></div>
-                    </div>
-                    <div className="h-10 bg-muted rounded"></div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          ) : sortedServices.length === 0 ? (
-            <div className="text-center py-16">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-muted mb-4">
-                <Filter className="h-8 w-8 text-muted-foreground" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">
-                {products.length === 0 ? 'Aucun service disponible' : 'Aucun service trouvé'}
-              </h3>
-              <p className="text-muted-foreground mb-4">
-                {products.length === 0 
-                  ? 'Nos services seront bientôt disponibles.' 
-                  : 'Essayez d\'ajuster vos filtres pour voir plus de résultats.'
-                }
-              </p>
-              {products.length > 0 && (
-                <Button onClick={clearFilters} variant="outline">
-                  Effacer tous les filtres
-                </Button>
-              )}
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {sortedServices.map((product, index) => (
-                <ProductCard key={product._id} product={product} index={index} />
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
       <section className="py-20 lg:py-32 relative overflow-hidden">
         <div className="absolute inset-0 gradient-hero opacity-5"></div>
         <div className="container mx-auto px-4 lg:px-8 relative">
@@ -324,8 +117,119 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Filters Section */}
-     
+      {/* Search Section */}
+      <section className="py-8 bg-card/30 border-y border-border">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="max-w-2xl mx-auto">
+            <div className="flex items-center gap-2 mb-4">
+              <Search className="h-5 w-5 text-primary" />
+              <h2 className="text-lg font-semibold">Rechercher un service</h2>
+              {hasActiveSearch && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={clearSearch}
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  <X className="h-4 w-4 mr-1" />
+                  Effacer
+                </Button>
+              )}
+            </div>
+
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input
+                type="text"
+                placeholder="Rechercher par nom, catégorie ou fonctionnalité..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10 pr-10 h-12 text-base"
+              />
+              {hasActiveSearch && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={clearSearch}
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 h-8 w-8 p-0"
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              )}
+            </div>
+            
+            {hasActiveSearch && (
+              <div className="mt-3 text-sm text-muted-foreground text-center">
+                {filteredServices.length} résultat{filteredServices.length > 1 ? 's' : ''} pour "{searchQuery}"
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* Services Results */}
+      <section className="py-16">
+        <div className="container mx-auto px-4 lg:px-8">
+          {!productsLoading && (
+            <div className="text-center mb-8">
+              <h2 className="text-2xl font-bold mb-2">
+                {hasActiveSearch ? 'Résultats de recherche' : 'Tous nos services'}
+              </h2>
+              <p className="text-muted-foreground">
+                {filteredServices.length} service{filteredServices.length > 1 ? 's' : ''} disponible{filteredServices.length > 1 ? 's' : ''}
+              </p>
+            </div>
+          )}
+
+          {productsLoading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <Card key={i} className="gradient-card border-border animate-pulse">
+                  <CardContent className="p-6">
+                    <div className="h-20 bg-muted rounded mb-4"></div>
+                    <div className="h-8 bg-muted rounded mb-2"></div>
+                    <div className="h-4 bg-muted rounded mb-4"></div>
+                    <div className="space-y-2 mb-6">
+                      <div className="h-4 bg-muted rounded"></div>
+                      <div className="h-4 bg-muted rounded"></div>
+                      <div className="h-4 bg-muted rounded"></div>
+                    </div>
+                    <div className="h-10 bg-muted rounded"></div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          ) : sortedServices.length === 0 ? (
+            <div className="text-center py-16">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-muted mb-4">
+                <Search className="h-8 w-8 text-muted-foreground" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">
+                {products.length === 0 ? 'Aucun service disponible' : hasActiveSearch ? 'Aucun résultat trouvé' : 'Aucun service disponible'}
+              </h3>
+              <p className="text-muted-foreground mb-4">
+                {products.length === 0 
+                  ? 'Nos services seront bientôt disponibles.' 
+                  : hasActiveSearch 
+                    ? 'Essayez avec d\'autres mots-clés ou vérifiez l\'orthographe.'
+                    : 'Nos services seront bientôt disponibles.'
+                }
+              </p>
+              {products.length > 0 && hasActiveSearch && (
+                <Button onClick={clearSearch} variant="outline">
+                  Effacer la recherche
+                </Button>
+              )}
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {sortedServices.map((product, index) => (
+                <ProductCard key={product._id} product={product} index={index} />
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
 
       {/* FAQ Section */}
       <section className="py-20 bg-gradient-hero relative overflow-hidden">
