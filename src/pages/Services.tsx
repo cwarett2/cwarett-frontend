@@ -84,39 +84,7 @@ const Services = () => {
       />
       
       {/* Header */}
-      <section className="py-20 lg:py-32 relative overflow-hidden">
-        <div className="absolute inset-0 gradient-hero opacity-5"></div>
-        <div className="container mx-auto px-4 lg:px-8 relative">
-          <div className="text-center mb-16 animate-fade-in">
-            <h1 className="text-4xl lg:text-6xl font-bold mb-6">
-              Nos Services
-              <span className="text-white ml-2">
-                Premium
-              </span>
-            </h1>
-            <p className="text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto">
-              Découvrez notre gamme complète de comptes premium aux prix les plus compétitifs 
-              du marché tunisien. Qualité garantie, support inclus.
-            </p>
-          </div>
-
-          {/* Guarantees */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-            {guarantees.map((guarantee, index) => (
-              <Card key={guarantee.title} className="glass border-white/10 hover-lift animate-slide-up" style={{animationDelay: `${index * 150}ms`}}>
-                <CardContent className="p-6 text-center">
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-4">
-                    <guarantee.icon className="h-6 w-6 text-primary" />
-                  </div>
-                  <h3 className="font-semibold mb-2">{guarantee.title}</h3>
-                  <p className="text-sm text-muted-foreground">{guarantee.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
+     
       {/* Search Section */}
       <section className="py-8 bg-card/30 border-y border-border">
         <div className="container mx-auto px-4 lg:px-8">
@@ -230,6 +198,39 @@ const Services = () => {
           )}
         </div>
       </section>
+       <section className="py-20 lg:py-32 relative overflow-hidden">
+        <div className="absolute inset-0 gradient-hero opacity-5"></div>
+        <div className="container mx-auto px-4 lg:px-8 relative">
+          <div className="text-center mb-16 animate-fade-in">
+            <h1 className="text-4xl lg:text-6xl font-bold mb-6">
+              Nos Services
+              <span className="text-white ml-2">
+                Premium
+              </span>
+            </h1>
+            <p className="text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto">
+              Découvrez notre gamme complète de comptes premium aux prix les plus compétitifs 
+              du marché tunisien. Qualité garantie, support inclus.
+            </p>
+          </div>
+
+          {/* Guarantees */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+            {guarantees.map((guarantee, index) => (
+              <Card key={guarantee.title} className="glass border-white/10 hover-lift animate-slide-up" style={{animationDelay: `${index * 150}ms`}}>
+                <CardContent className="p-6 text-center">
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-4">
+                    <guarantee.icon className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="font-semibold mb-2">{guarantee.title}</h3>
+                  <p className="text-sm text-muted-foreground">{guarantee.description}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
 
       {/* FAQ Section */}
       <section className="py-20 bg-gradient-hero relative overflow-hidden">
