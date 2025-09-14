@@ -33,7 +33,7 @@ const Home = () => {
 
   const testimonials = [
     {
-      name: 'Ahmed Ben Salem',
+      name: 'Ahmed saidani',
       text: 'Service impeccable ! Mon compte Netflix fonctionne parfaitement depuis 8 mois.',
       rating: 5,
       service: 'Netflix Premium'
