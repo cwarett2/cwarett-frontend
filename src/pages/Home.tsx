@@ -178,6 +178,16 @@ const Home = () => {
               </p>
             </div>
           )}
+
+          {/* View All Services Button */}
+          <div className="text-center mt-12">
+            <Button variant="outline" size="lg" asChild className="group">
+              <Link to="/services">
+                Voir tous nos services
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </Button>
+          </div>
         </div>
       </section>
 
