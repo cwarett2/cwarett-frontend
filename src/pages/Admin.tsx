@@ -1005,6 +1005,31 @@ const Admin = () => {
                               <p className="text-sm font-medium text-muted-foreground">Date de commande</p>
                               <p className="font-medium">{formatDate(order.createdAt)}</p>
                             </div>
+                            <div>
+                              <p className="text-sm font-medium text-muted-foreground">Méthode de paiement</p>
+                              <div className="flex items-center space-x-2">
+                                {order.paymentMethod === 'd17' && (
+                                  <Badge className="bg-blue-100 text-blue-800 border-blue-300">
+                                    D17
+                                  </Badge>
+                                )}
+                                {order.paymentMethod === 'flouci' && (
+                                  <Badge className="bg-green-100 text-green-800 border-green-300">
+                                    Flouci
+                                  </Badge>
+                                )}
+                                {order.paymentMethod === 'virement' && (
+                                  <Badge className="bg-purple-100 text-purple-800 border-purple-300">
+                                    Virement bancaire
+                                  </Badge>
+                                )}
+                                {!order.paymentMethod && (
+                                  <Badge variant="outline">
+                                    Non spécifié
+                                  </Badge>
+                                )}
+                              </div>
+                            </div>
                           </div>
                           
                           {order.message && (
@@ -1045,6 +1070,31 @@ const Admin = () => {
                                   <div>
                                     <Label>Service</Label>
                                     <p className="font-medium">{order.service}</p>
+                                  </div>
+                                  <div>
+                                    <Label>Méthode de paiement</Label>
+                                    <div className="flex items-center space-x-2 mt-1">
+                                      {order.paymentMethod === 'd17' && (
+                                        <Badge className="bg-blue-100 text-blue-800 border-blue-300">
+                                          D17 - Dinars électroniques
+                                        </Badge>
+                                      )}
+                                      {order.paymentMethod === 'flouci' && (
+                                        <Badge className="bg-green-100 text-green-800 border-green-300">
+                                          Flouci - Paiement mobile
+                                        </Badge>
+                                      )}
+                                      {order.paymentMethod === 'virement' && (
+                                        <Badge className="bg-purple-100 text-purple-800 border-purple-300">
+                                          Virement bancaire
+                                        </Badge>
+                                      )}
+                                      {!order.paymentMethod && (
+                                        <Badge variant="outline">
+                                          Non spécifié
+                                        </Badge>
+                                      )}
+                                    </div>
                                   </div>
                                 </div>
                                 
