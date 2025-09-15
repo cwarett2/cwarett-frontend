@@ -1097,6 +1097,14 @@ const Admin = () => {
                                           Virement bancaire
                                         </Badge>
                                       )}
+                                       {order.paymentMethod === 'e-dinar' && (
+                                        <Badge className="bg-purple-100 text-purple-800 border-purple-300">
+                                          E-Dinar
+                                        </Badge>
+                     {order.paymentMethod === 'poste' && (
+                                        <Badge className="bg-purple-100 text-purple-800 border-purple-300">
+                                          Poste
+                                        </Badge>
                                       {!order.paymentMethod && (
                                         <Badge variant="outline">
                                           Non spécifié
@@ -1194,4 +1202,5 @@ const Admin = () => {
 };
 
 export default Admin;
+
 
