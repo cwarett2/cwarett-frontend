@@ -12,6 +12,7 @@ export interface Order {
   service: string;
   message: string;
   paymentMethod?: string;
+  paymentMethod?: string;
   status: 'en_attente' | 'en_cours' | 'terminee' | 'annulee';
   priority: 'basse' | 'normale' | 'haute' | 'urgente';
   createdAt: string;
@@ -37,7 +38,9 @@ export const useOrders = () => {
     }
   };
 
-  const createOrder = async (orderData: Omit<Order, '_id' | 'createdAt' | 'updatedAt'>) => {
+  const createOrder = async (
+    orderData: Omit<Order, '_id' | 'createdAt' | 'updatedAt'>
+  ) => {
     try {
       const response = await axios.post(`${API_BASE_URL}/orders`, orderData);
       await fetchOrders(); // Refresh the list
@@ -50,7 +53,10 @@ export const useOrders = () => {
 
   const updateOrder = async (id: string, orderData: Partial<Order>) => {
     try {
-      const response = await axios.put(`${API_BASE_URL}/orders/${id}`, orderData);
+      const response = await axios.put(
+        `${API_BASE_URL}/orders/${id}`,
+        orderData
+      );
       await fetchOrders(); // Refresh the list
       return response.data;
     } catch (err) {
@@ -73,13 +79,13 @@ export const useOrders = () => {
     fetchOrders();
   }, []);
 
-  return { 
-    orders, 
-    loading, 
-    error, 
+  return {
+    orders,
+    loading,
+    error,
     refetch: fetchOrders,
     createOrder,
     updateOrder,
-    deleteOrder
+    deleteOrder,
   };
 };
