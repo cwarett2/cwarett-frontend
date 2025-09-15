@@ -61,6 +61,20 @@ const Checkout = () => {
       icon: Building2,
       color: 'text-purple-600'
     }
+     {
+      id: 'e-dinar',
+      name: 'E-Dinar',
+      description: 'Paiement avec E-dinar',
+      icon: Smartphone,
+      color: 'text-green-600'
+    },
+     {
+      id: 'poste',
+      name: 'Poste',
+      description: 'Paiement avec Poste',
+      icon: Building2,
+      color: 'text-green-600'
+    }
   ];
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -402,3 +416,4 @@ const Checkout = () => {
 };
 
 export default Checkout;
+
