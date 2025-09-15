@@ -11,6 +11,7 @@ export interface Order {
   phone: string;
   service: string;
   message: string;
+  paymentMethod?: string;
   status: 'en_attente' | 'en_cours' | 'terminee' | 'annulee';
   priority: 'basse' | 'normale' | 'haute' | 'urgente';
   createdAt: string;
