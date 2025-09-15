@@ -1026,11 +1026,11 @@ const Admin = () => {
                                  {order.paymentMethod === 'e-dinar' && (
                                   <Badge className="bg-blue-100 text-blue-800 border-blue-300">
                                     E-Dinar
-                                  </Badge>
+                                  </Badge> )}
                      {order.paymentMethod === 'poste' && (
                                   <Badge className="bg-blue-100 text-blue-800 border-blue-300">
                                    Poste
-                                  </Badge>
+                                  </Badge> )}
                                 {!order.paymentMethod && (
                                   <Badge variant="outline">
                                     Non spécifié
@@ -1100,11 +1100,11 @@ const Admin = () => {
                                        {order.paymentMethod === 'e-dinar' && (
                                         <Badge className="bg-purple-100 text-purple-800 border-purple-300">
                                           E-Dinar
-                                        </Badge>
+                                        </Badge> )}
                      {order.paymentMethod === 'poste' && (
                                         <Badge className="bg-purple-100 text-purple-800 border-purple-300">
                                           Poste
-                                        </Badge>
+                                        </Badge> )}
                                       {!order.paymentMethod && (
                                         <Badge variant="outline">
                                           Non spécifié
@@ -1202,5 +1202,6 @@ const Admin = () => {
 };
 
 export default Admin;
+
 
 
