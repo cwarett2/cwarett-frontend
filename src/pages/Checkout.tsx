@@ -60,7 +60,7 @@ const Checkout = () => {
       description: 'Virement bancaire traditionnel',
       icon: Building2,
       color: 'text-purple-600'
-    }
+    },
      {
       id: 'e-dinar',
       name: 'E-Dinar',
@@ -416,4 +416,5 @@ const Checkout = () => {
 };
 
 export default Checkout;
+
 
