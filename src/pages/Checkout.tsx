@@ -7,6 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { useCart } from '@/contexts/CartContext';
 import { useOrders } from '@/hooks/useOrders';
 import { toast } from '@/hooks/use-toast';
@@ -17,7 +18,10 @@ import {
   Phone, 
   MessageCircle, 
   CheckCircle,
-  ArrowLeft
+  ArrowLeft,
+  CreditCard,
+  Smartphone,
+  Building2
 } from 'lucide-react';
 
 
@@ -31,9 +35,33 @@ const Checkout = () => {
     name: '',
     email: '',
     phone: '',
-    message: ''
+    message: '',
+    paymentMethod: 'd17'
   });
 
+  const paymentMethods = [
+    {
+      id: 'd17',
+      name: 'D17',
+      description: 'Paiement via D17 (Dinars électroniques)',
+      icon: CreditCard,
+      color: 'text-blue-600'
+    },
+    {
+      id: 'flouci',
+      name: 'Flouci',
+      description: 'Paiement mobile via Flouci',
+      icon: Smartphone,
+      color: 'text-green-600'
+    },
+    {
+      id: 'virement',
+      name: 'Virement bancaire',
+      description: 'Virement bancaire traditionnel',
+      icon: Building2,
+      color: 'text-purple-600'
+    }
+  ];
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
@@ -54,15 +82,18 @@ const Checkout = () => {
     setIsSubmitting(true);
     
     try {
+      const selectedPaymentMethod = paymentMethods.find(method => method.id === formData.paymentMethod);
+      
       // Create order with cart items
       const orderData = {
         name: formData.name,
         email: formData.email,
         phone: formData.phone,
         service: items.map(item => `${item.name} (x${item.quantity})`).join(', '),
-        message: `${formData.message}\n\nDétails de la commande:\n${items.map(item => 
+        message: `Méthode de paiement: ${selectedPaymentMethod?.name}\n\n${formData.message}\n\nDétails de la commande:\n${items.map(item => 
           `- ${item.name} x${item.quantity} = ${(item.price * item.quantity).toFixed(2)} TND`
         ).join('\n')}\n\nTotal: ${total.toFixed(2)} TND`,
+        paymentMethod: formData.paymentMethod,
         status: 'en_attente' as const,
         priority: 'normale' as const
       };
@@ -259,6 +290,37 @@ const Checkout = () => {
                       />
                     </div>
 
+                    {/* Payment Method Selection */}
+                    <div className="space-y-4">
+                      <Label className="flex items-center gap-2">
+                        <CreditCard className="h-4 w-4" />
+                        Méthode de paiement *
+                      </Label>
+                      <RadioGroup 
+                        value={formData.paymentMethod} 
+                        onValueChange={(value) => handleInputChange('paymentMethod', value)}
+                        className="space-y-3"
+                      >
+                        {paymentMethods.map((method) => (
+                          <div key={method.id} className="flex items-center space-x-3 p-4 border rounded-lg hover:bg-muted/50 transition-colors">
+                            <RadioGroupItem value={method.id} id={method.id} />
+                            <div className="flex items-center space-x-3 flex-1">
+                              <div className={`p-2 rounded-full bg-muted ${method.color}`}>
+                                <method.icon className="h-5 w-5" />
+                              </div>
+                              <div className="flex-1">
+                                <Label htmlFor={method.id} className="font-medium cursor-pointer">
+                                  {method.name}
+                                </Label>
+                                <p className="text-sm text-muted-foreground">
+                                  {method.description}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </RadioGroup>
+                    </div>
                     <div className="space-y-2">
                       <Label htmlFor="message" className="flex items-center gap-2">
                         <MessageCircle className="h-4 w-4" />
@@ -295,7 +357,7 @@ const Checkout = () => {
                         </div>
                         <div>
                           <p className="font-medium text-foreground">Paiement</p>
-                          <p>Effectuez le paiement via virement, D17 ou cash</p>
+                          <p>Effectuez le paiement via {paymentMethods.find(m => m.id === formData.paymentMethod)?.name}</p>
                         </div>
                       </div>
                       
