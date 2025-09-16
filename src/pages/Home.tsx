@@ -63,8 +63,8 @@ const Home = () => {
     <div className="min-h-screen">
       <SEOHead 
         title="Accueil"
-        description="Découvrez nos comptes premium Netflix, ChatGPT, Spotify et Disney+ aux meilleurs prix en Tunisie. Livraison rapide et support 24/7."
-        keywords="Netflix premium tunisie, ChatGPT plus, Spotify premium, Disney+, comptes premium"
+        description="Netflix , Spotify, ChatGPT, YouTube , Apple Gift Cards, PSN, Xbox Game Pass… et bien plus encore ! Avec CWARETT, profitez de vos services premium sans attendre."
+        keywords="Netflix premium tunisie, ChatGPT plus, Spotify premium, Youtube Premium , comptes premium"
       />
       
       {/* Hero Section */}
@@ -118,7 +118,7 @@ const Home = () => {
                 <div className="text-sm text-muted-foreground">Clients satisfaits</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-accent">24/7</div>
+                <div className="text-2xl font-bold text-accent">7/7</div>
                 <div className="text-sm text-muted-foreground">Support disponible</div>
               </div>
               <div className="text-center">
@@ -139,7 +139,7 @@ const Home = () => {
               <span className="text-white ml-2">Premium</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Découvrez notre sélection de comptes premium aux meilleurs prix du marché tunisien.
+             Profitez de notre large sélection de comptes premium aux prix les plus compétitifs en Tunisie.
             </p>
           </div>
 
@@ -183,7 +183,7 @@ const Home = () => {
           <div className="text-center mt-12">
             <Button variant="outline" size="lg" asChild className="group">
               <Link to="/services">
-                Voir tous nos services
+                Tous nos services
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
@@ -218,7 +218,7 @@ const Home = () => {
               </div>
               <h3 className="text-xl font-semibold mb-2">Livraison Rapide</h3>
               <p className="text-muted-foreground">
-                Recevez vos comptes en moins de 30 minutes après la commande.
+                Recevez vos comptes dans les plus brefs délais après votre commande.
               </p>
             </div>
 
@@ -300,7 +300,7 @@ const Home = () => {
         <div className="relative container mx-auto px-4 lg:px-8 text-center">
           <h2 className="text-3xl lg:text-5xl font-bold text-white mb-6">Prêt à commencer ?</h2>
           <p className="text-lg text-white/80 mb-8 max-w-2xl mx-auto">
-            Rejoignez des milliers de clients satisfaits et profitez de nos services premium dès aujourd'hui.
+           Des milliers de clients nous font déjà confiance , rejoignez-les et profitez de nos services premium dès aujourd’hui.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button variant="secondary" size="xl" asChild>
