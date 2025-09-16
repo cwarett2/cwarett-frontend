@@ -95,8 +95,8 @@ const Home = () => {
             </h1>
 
             <p className="text-lg lg:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Accédez aux meilleurs services numériques avec nos comptes premium garantis. 
-              Qualité, sécurité et support 24/7 inclus.
+              Netflix , Spotify, ChatGPT, YouTube , Apple Gift Cards, PSN, Xbox Game Pass… et bien plus encore !
+              Avec CWARETT, profitez de vos services premium sans attendre.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
