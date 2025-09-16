@@ -315,7 +315,7 @@ const Contact = () => {
                 <CardContent className="space-y-4">
                   <p className="text-muted-foreground">
                     <strong>{APP_CONFIG.BUSINESS.NAME}</strong><br />
-                    {APP_CONFIG.BUSINESS.LOCATION}
+                    Nabeul,Tunisie
                   </p>
                   <div className="flex items-center space-x-2 text-sm">
                     <Clock className="h-4 w-4 text-primary" />
