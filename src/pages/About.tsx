@@ -104,8 +104,9 @@ const About = () => {
             </h1>
             
             <p className="text-lg lg:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              Depuis 2022, CWARETT s'est imposé comme le leader tunisien dans la fourniture 
-              de comptes premium. Notre mission : rendre les services de qualité accessibles à tous.
+             Depuis 2022, CWARETT s’est imposé comme le leader tunisien dans la fourniture de comptes premium.
+             Notre mission : rendre les services de qualité accessibles à tous.
+             Contrairement à la plupart des acteurs du marché qui proposent des comptes partagés, notre vision est de garantir des services fiables et sécurisés, grâce à des comptes 100 % personnels, pour offrir à nos clients la meilleure expérience possible.
             </p>
           </div>
         </div>
