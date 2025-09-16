@@ -109,7 +109,7 @@ const Contact = () => {
             <h1 className="text-4xl lg:text-6xl font-bold mb-6 leading-tight">
               Contactez
               <span className="text-white ml-2">
-               notre équipe
+                notre équipe
               </span>
               <br />
               <span className="text-2xl lg:text-3xl text-muted-foreground">
