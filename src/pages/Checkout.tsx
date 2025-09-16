@@ -71,7 +71,7 @@ const Checkout = () => {
      {
       id: 'poste',
       name: 'Poste',
-      description: 'Paiement avec Poste',
+      description: 'Paiement via La Poste',
       icon: Building2,
       color: 'text-green-600'
     }
@@ -140,7 +140,7 @@ const Checkout = () => {
           <ShoppingCart className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
           <h1 className="text-2xl font-bold mb-2">Votre panier est vide</h1>
           <p className="text-muted-foreground mb-6">
-            Ajoutez des services à votre panier pour procéder au checkout.
+            Ajoutez des services à votre panier pour procéder au paiement.
           </p>
           <Button asChild>
             <Link to="/services">Voir nos services</Link>
@@ -232,15 +232,15 @@ const Checkout = () => {
                   </div>
                   <div className="flex items-center space-x-3">
                     <CheckCircle className="h-4 w-4 text-success" />
-                    <span className="text-sm">Livraison sous 30 minutes</span>
+                    <span className="text-sm">Livraison rapide </span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <CheckCircle className="h-4 w-4 text-success" />
-                    <span className="text-sm">Support 24/7 inclus</span>
+                    <span className="text-sm">Support rapide inclus</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <CheckCircle className="h-4 w-4 text-success" />
-                    <span className="text-sm">Remplacement gratuit</span>
+                    <span className="text-sm">Remplacement immédiat si erreur de notre part</span>
                   </div>
                 </div>
               </CardContent>
@@ -353,7 +353,7 @@ const Checkout = () => {
                   <Separator />
 
                   <div className="space-y-4">
-                    <h3 className="font-semibold">Étapes suivantes</h3>
+                    <h3 className="font-semibold">Étape suivante</h3>
                     <div className="space-y-3 text-sm text-muted-foreground">
                       <div className="flex items-start space-x-3">
                         <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold">
@@ -381,7 +381,7 @@ const Checkout = () => {
                         </div>
                         <div>
                           <p className="font-medium text-foreground">Livraison</p>
-                          <p>Recevez vos comptes sous 30 minutes maximum</p>
+                          <p>Recevez vos commandes dans les plus brefs délais</p>
                         </div>
                       </div>
                     </div>
@@ -416,5 +416,6 @@ const Checkout = () => {
 };
 
 export default Checkout;
+
 
 
