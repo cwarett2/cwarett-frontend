@@ -272,83 +272,88 @@ const ProductPage = () => {
                 return (
                   <Card 
                     key={index} 
-                    className={`relative overflow-hidden hover-lift animate-slide-up transition-all duration-300 ${
+                    className={`relative overflow-hidden hover-lift animate-slide-up transition-all duration-300 h-[600px] flex flex-col ${
                       isPromoted ? 'ring-2 ring-primary shadow-glow scale-105' : ''
                     } ${isPopular && !isPromoted ? 'ring-2 ring-accent shadow-accent scale-105' : ''}`}
-                    style={{animationDelay: `${index * 150}ms`}}
-                  >
-                    {/* Popular Badge */}
-                    
-
-                    {/* Decorative Background */}
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-primary/10 to-transparent rounded-full blur-2xl"></div>
-
-                    <CardHeader className="text-center pb-6 pt-8">
-                      <div className="space-y-2">
-                        <CardTitle className="text-2xl font-bold">{subscription.name}</CardTitle>
-                        
-                        <div className="space-y-3">
-                          <div className="flex items-baseline justify-center space-x-2">
-                            <span className="text-5xl font-bold text-primary">{subscription.price}</span>
-                            <div className="text-left">
-                              <span className="text-muted-foreground text-sm">TND</span>
-                             
-                            </div>
-                          </div>
-                          
-                        
-                        </div>
-                      </div>
-                    </CardHeader>
-
-                    <CardContent className="space-y-6 pb-8">
-                      {/* Key Features */}
-                      <div className="space-y-3">
-                        <h4 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
-                          Fonctionnalités incluses
-                        </h4>
-                        <ul className="space-y-3">
-                          {product.features.slice(0, 4).map((feature, featureIndex) => (
-                            <li key={featureIndex} className="flex items-start space-x-3">
-                              <CheckCircle className="h-5 w-5 text-success flex-shrink-0 mt-0.5" />
-                              <span className="text-sm leading-relaxed">{feature}</span>
-                            </li>
-                          ))}
-                          {product.features.length > 4 && (
-                            <li className="flex items-center space-x-3 text-primary">
-                              <Sparkles className="h-4 w-4" />
-                              <span className="text-sm font-medium">
-                                +{product.features.length - 4} autres fonctionnalités
-                              </span>
-                            </li>
-                          )}
-                        </ul>
-                      </div>
-
-                      {/* Service Specs */}
+                     style={{animationDelay: `${index * 150}ms`}}
+                   >
+                     {/* Popular Badge */}
                      
 
-                      {/* CTA Button */}
-                      <Button 
-                        variant={isPromoted ? 'hero' : isPopular ? 'accent' : product.color as any}
-                        className="w-full group relative overflow-hidden"
-                        size="lg"
-                        onClick={() => handleAddToCart(subscription)}
-                      >
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                        <Zap className="mr-2 h-5 w-5" />
-                        Choisir cet abonnement
-                      </Button>
+                     {/* Decorative Background */}
+                     <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-primary/10 to-transparent rounded-full blur-2xl"></div>
 
-                      {/* Money Back Guarantee */}
-                      <div className="text-center text-xs text-muted-foreground">
-                        <Shield className="h-4 w-4 inline mr-1" />
-                        Garantie de remboursement 30 jours
+                    <CardHeader className="text-center pb-6 pt-8 flex-shrink-0">
+                       <div className="space-y-2">
+                         <CardTitle className="text-2xl font-bold">{subscription.name}</CardTitle>
+                         
+                         <div className="space-y-3">
+                           <div className="flex items-baseline justify-center space-x-2">
+                             <span className="text-5xl font-bold text-primary">{subscription.price}</span>
+                             <div className="text-left">
+                               <span className="text-muted-foreground text-sm">TND</span>
+                              
+                             </div>
+                           </div>
+                           
+                         
+                         </div>
+                       </div>
+                     </CardHeader>
+
+                    <CardContent className="flex-1 flex flex-col pb-8">
+                      <div className="flex-1 space-y-6">
+                       {/* Key Features */}
+                       <div className="space-y-3">
+                         <h4 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
+                           Fonctionnalités incluses
+                         </h4>
+                         <ul className="space-y-3">
+                           {product.features.slice(0, 4).map((feature, featureIndex) => (
+                             <li key={featureIndex} className="flex items-start space-x-3">
+                               <CheckCircle className="h-5 w-5 text-success flex-shrink-0 mt-0.5" />
+                               <span className="text-sm leading-relaxed">{feature}</span>
+                             </li>
+                           ))}
+                           {product.features.length > 4 && (
+                             <li className="flex items-center space-x-3 text-primary">
+                               <Sparkles className="h-4 w-4" />
+                               <span className="text-sm font-medium">
+                                 +{product.features.length - 4} autres fonctionnalités
+                               </span>
+                             </li>
+                           )}
+                         </ul>
+                       </div>
+
+                       {/* Service Specs */}
+                      
                       </div>
-                    </CardContent>
-                  </Card>
-                );
-              })}
+
+                      {/* Fixed bottom section */}
+                      <div className="mt-auto space-y-4">
+                       {/* CTA Button */}
+                       <Button 
+                         variant={isPromoted ? 'hero' : isPopular ? 'accent' : product.color as any}
+                         className="w-full group relative overflow-hidden"
+                         size="lg"
+                         onClick={() => handleAddToCart(subscription)}
+                       >
+                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                         <Zap className="mr-2 h-5 w-5" />
+                         Choisir cet abonnement
+                       </Button>
+
+                       {/* Money Back Guarantee */}
+                       <div className="text-center text-xs text-muted-foreground">
+                         <Shield className="h-4 w-4 inline mr-1" />
+                         Garantie de remboursement 30 jours
+                       </div>
+                      </div>
+                     </CardContent>
+                   </Card>
+                 );
+               })}
             </div>
           )}
         </div>
@@ -512,6 +517,5 @@ const ProductPage = () => {
     </div>
   );
 };
-
 
 export default ProductPage;
