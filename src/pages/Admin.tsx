@@ -1077,7 +1077,7 @@ const Admin = () => {
                                   )}
                                   <div>
                                     <Label>Service</Label>
-                                    <p className="font-medium">{order.service}</p>
+                                    <p className="font-medium">{order.service}<br/></p>
                                   </div>
                                   <div>
                                     <Label>Méthode de paiement</Label>
@@ -1202,6 +1202,7 @@ const Admin = () => {
 };
 
 export default Admin;
+
 
 
 
