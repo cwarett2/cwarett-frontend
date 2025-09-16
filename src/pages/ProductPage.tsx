@@ -292,15 +292,11 @@ const ProductPage = () => {
                             <span className="text-5xl font-bold text-primary">{subscription.price}</span>
                             <div className="text-left">
                               <span className="text-muted-foreground text-sm">TND</span>
-                              <div className="text-xs text-muted-foreground">par mois</div>
+                             
                             </div>
                           </div>
                           
-                          {subscription.price > 0 && (
-                            <div className="text-sm text-muted-foreground">
-                              Soit {(subscription.price / 30).toFixed(2)} TND/jour
-                            </div>
-                          )}
+                        
                         </div>
                       </div>
                     </CardHeader>
@@ -516,5 +512,6 @@ const ProductPage = () => {
     </div>
   );
 };
+
 
 export default ProductPage;
