@@ -87,7 +87,7 @@ const Contact = () => {
     <div className="min-h-screen">
       <SEOHead 
         title="Nous contacter"
-        description="Contactez l'équipe CWARETT.TN pour vos questions sur nos services premium. Support 24/7 disponible par téléphone, email et WhatsApp."
+        description="Besoin d’aide ou d’informations ? L’équipe CWARETT.TN est toujours à votre écoute ! Contactez-nous facilement par téléphone, e-mail ou WhatsApp et profitez d’un support rapide et efficace."
         keywords="contact CWARETT, support client, aide, questions, WhatsApp, téléphone"
       />
       
@@ -118,8 +118,7 @@ const Contact = () => {
             </h1>
             
             <p className="text-lg lg:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              Notre équipe est disponible 24h/24 pour répondre à vos questions et vous accompagner
-              dans vos projets.
+             Toujours à vos côtés, à tout moment, pour répondre à vos besoins et concrétiser vos projets.
             </p>
           </div>
         </div>
@@ -296,7 +295,7 @@ const Contact = () => {
                   </div>
                   <div className="flex items-center space-x-3">
                     <CheckCircle className="h-5 w-5 text-success" />
-                    <span className="text-sm">Support client 24h/24 et 7j/7</span>
+                    <span className="text-sm">Support client 7j/7</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <CheckCircle className="h-5 w-5 text-success" />
@@ -351,9 +350,9 @@ const Contact = () => {
               </div>
               
               <div>
-                <h3 className="font-semibold mb-2">Proposez-vous des consultations gratuites ?</h3>
+                <h3 className="font-semibold mb-2">Comment puis-je acheter vos services ?</h3>
                 <p className="text-sm text-muted-foreground">
-                  Oui ! Le premier échange pour comprendre vos besoins est toujours gratuit.
+                  Il vous suffit de sélectionner votre offre, de valider la commande et vous recevrez vos accès rapidement et en toute sécurité par e-mail, WhatsApp ou tout autre moyen de communication convenu.
                 </p>
               </div>
 
