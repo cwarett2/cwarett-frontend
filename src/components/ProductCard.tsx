@@ -58,7 +58,7 @@ export const ProductCard = ({ product, index = 0 }: ProductCardProps) => {
       
       <CardHeader className="pb-4">
         <CardTitle className="text-xl mb-2">{product.name}</CardTitle>
-        <p className="text-sm text-muted-foreground">{product.description}</p>
+      
       </CardHeader>
       
       <CardContent className="pt-0">
@@ -104,3 +104,4 @@ export const ProductCard = ({ product, index = 0 }: ProductCardProps) => {
     </Card>
   );
 };
+
