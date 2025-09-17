@@ -7,7 +7,6 @@ import { toast } from '@/hooks/use-toast';
 import { CheckCircle } from 'lucide-react';
 import { Product } from '@/hooks/useProducts';
 
-
 interface ProductCardProps {
   product: Product;
   index?: number;
@@ -20,9 +19,10 @@ export const ProductCard = ({ product, index = 0 }: ProductCardProps) => {
   const cheapestSubscription = product.subscriptions?.length > 0 
     ? product.subscriptions.reduce((min, sub) => sub.price < min.price ? sub : min)
     : null;
+
   return (
     <Card 
-      className={`relative overflow-hidden gradient-card border-border hover-lift animate-slide-up group ${
+      className={`relative overflow-hidden gradient-card border-border hover-lift animate-slide-up group h-full flex flex-col ${
         product.popular ? 'ring-2 ring-primary/50' : ''
       }`}
       style={{animationDelay: `${index * 150}ms`}}
@@ -58,10 +58,9 @@ export const ProductCard = ({ product, index = 0 }: ProductCardProps) => {
       
       <CardHeader className="pb-4">
         <CardTitle className="text-xl mb-2">{product.name}</CardTitle>
-      
       </CardHeader>
       
-      <CardContent className="pt-0">
+      <CardContent className="flex flex-col flex-1 pt-0">
         {cheapestSubscription ? (
           <div className="flex items-baseline space-x-2 mb-4">
             <span className="text-sm text-muted-foreground">À partir de</span>
@@ -88,9 +87,10 @@ export const ProductCard = ({ product, index = 0 }: ProductCardProps) => {
           )}
         </ul>
         
-        <div className="space-y-2">
+        {/* Bouton toujours en bas */}
+        <div className="mt-auto">
           <Button 
-             variant={product.color as any}
+            variant={product.color as any}
             className="w-full"
             size="lg"
             asChild
@@ -104,4 +104,3 @@ export const ProductCard = ({ product, index = 0 }: ProductCardProps) => {
     </Card>
   );
 };
-
