@@ -155,7 +155,7 @@ const ProductPage = () => {
               <h1 className="text-4xl lg:text-6xl font-bold mb-6 leading-tight">
                 {product.name}
                 <span className="block text-2xl lg:text-3xl text-primary mt-2 font-medium">
-                  Premium Access
+                  Offre spéciale
                 </span>
               </h1>
               
@@ -379,9 +379,7 @@ const ProductPage = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg mb-2">{feature}</h3>
-                    <p className="text-muted-foreground">
-                      Profitez pleinement de cette fonctionnalité premium incluse dans tous nos abonnements.
-                    </p>
+                   
                   </div>
                 </div>
               ))}
@@ -519,3 +517,4 @@ const ProductPage = () => {
 };
 
 export default ProductPage;
+
