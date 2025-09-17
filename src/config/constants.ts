@@ -6,7 +6,7 @@ export const APP_CONFIG = {
   // Contact Information
   CONTACT: {
     PHONE: import.meta.env.VITE_CONTACT_PHONE || '+216 XX XXX XXX',
-    EMAIL: import.meta.env.VITE_CONTACT_EMAIL || 'contact@cwarett.tn',
+    EMAIL: import.meta.env.VITE_CONTACT_EMAIL || 'serviceclient@cwarett.com',
     WHATSAPP: import.meta.env.VITE_WHATSAPP_NUMBER || '+216 XX XXX XXX',
   },
   
@@ -26,7 +26,7 @@ export const APP_CONFIG = {
   // Business Information
   BUSINESS: {
     NAME: 'CWARETT.TN',
-    LOCATION: 'Centre-ville, Tunis, Tunisie',
+    LOCATION: 'Nabeul , Tunisie',
     HOURS: 'Disponible 24h/24, 7j/7',
   }
 } as const;
@@ -38,4 +38,5 @@ export const SEO_CONFIG = {
   KEYWORDS: 'Netflix premium, ChatGPT plus, Spotify premium, Disney+, comptes premium tunisie, services numériques',
   AUTHOR: 'CWARETT.TN',
   TWITTER_HANDLE: '@CWARETT.TN_tn',
+
 } as const;
