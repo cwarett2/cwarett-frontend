@@ -158,19 +158,21 @@ const Admin = () => {
 
   // Update image when category changes
   useEffect(() => {
+    // Don't auto-update image if we're editing an existing product or if user uploaded a custom image
+    if (editingProduct || uploadedImageFile) {
+      return;
+    }
+    
     const categoryKey = formData.category.toLowerCase().replace(/\s+/g, '').replace(/[^a-z0-9]/g, '');
     const imageCategory = ['streaming', 'ai', 'tools'].includes(categoryKey) ? categoryKey : 'other';
     
     if (formData.category && sampleImages[imageCategory as keyof typeof sampleImages]) {
-      // Only update if no custom image is uploaded
-      if (!uploadedImageFile) {
-        setFormData(prev => ({
-          ...prev,
-          image: sampleImages[imageCategory as keyof typeof sampleImages][0]
-        }));
-      }
+      setFormData(prev => ({
+        ...prev,
+        image: sampleImages[imageCategory as keyof typeof sampleImages][0]
+      }));
     }
-  }, [formData.category, uploadedImageFile]);
+  }, [formData.category, uploadedImageFile, editingProduct]);
 
   const fetchProducts = async () => {
     try {
@@ -999,44 +1001,11 @@ const Admin = () => {
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                               <p className="text-sm font-medium text-muted-foreground">Service demandé</p>
-                              <p className="font-medium">{order.service}</p>
+                              <p className="font-medium">{order.service} <br/> </p>
                             </div>
                             <div>
                               <p className="text-sm font-medium text-muted-foreground">Date de commande</p>
                               <p className="font-medium">{formatDate(order.createdAt)}</p>
-                            </div>
-                            <div>
-                              <p className="text-sm font-medium text-muted-foreground">Méthode de paiement</p>
-                              <div className="flex items-center space-x-2">
-                                {order.paymentMethod === 'd17' && (
-                                  <Badge className="bg-blue-100 text-blue-800 border-blue-300">
-                                    D17
-                                  </Badge>
-                                )}
-                                {order.paymentMethod === 'flouci' && (
-                                  <Badge className="bg-green-100 text-green-800 border-green-300">
-                                    Flouci
-                                  </Badge>
-                                )}
-                                {order.paymentMethod === 'virement' && (
-                                  <Badge className="bg-purple-100 text-purple-800 border-purple-300">
-                                    Virement bancaire
-                                  </Badge>
-                                )}
-                                 {order.paymentMethod === 'e-dinar' && (
-                                  <Badge className="bg-blue-100 text-blue-800 border-blue-300">
-                                    E-Dinar
-                                  </Badge> )}
-                     {order.paymentMethod === 'poste' && (
-                                  <Badge className="bg-blue-100 text-blue-800 border-blue-300">
-                                   Poste
-                                  </Badge> )}
-                                {!order.paymentMethod && (
-                                  <Badge variant="outline">
-                                    Non spécifié
-                                  </Badge>
-                                )}
-                              </div>
                             </div>
                           </div>
                           
@@ -1077,40 +1046,7 @@ const Admin = () => {
                                   )}
                                   <div>
                                     <Label>Service</Label>
-                                    <p className="font-medium">{order.service}<br/></p>
-                                  </div>
-                                  <div>
-                                    <Label>Méthode de paiement</Label>
-                                    <div className="flex items-center space-x-2 mt-1">
-                                      {order.paymentMethod === 'd17' && (
-                                        <Badge className="bg-blue-100 text-blue-800 border-blue-300">
-                                          D17 - Dinars électroniques
-                                        </Badge>
-                                      )}
-                                      {order.paymentMethod === 'flouci' && (
-                                        <Badge className="bg-green-100 text-green-800 border-green-300">
-                                          Flouci - Paiement mobile
-                                        </Badge>
-                                      )}
-                                      {order.paymentMethod === 'virement' && (
-                                        <Badge className="bg-purple-100 text-purple-800 border-purple-300">
-                                          Virement bancaire
-                                        </Badge>
-                                      )}
-                                       {order.paymentMethod === 'e-dinar' && (
-                                        <Badge className="bg-purple-100 text-purple-800 border-purple-300">
-                                          E-Dinar
-                                        </Badge> )}
-                     {order.paymentMethod === 'poste' && (
-                                        <Badge className="bg-purple-100 text-purple-800 border-purple-300">
-                                          Poste
-                                        </Badge> )}
-                                      {!order.paymentMethod && (
-                                        <Badge variant="outline">
-                                          Non spécifié
-                                        </Badge>
-                                      )}
-                                    </div>
+                                    <p className="font-medium">{order.service}</p>
                                   </div>
                                 </div>
                                 
@@ -1202,7 +1138,3 @@ const Admin = () => {
 };
 
 export default Admin;
-
-
-
-
