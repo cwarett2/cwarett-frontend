@@ -20,6 +20,8 @@ export default defineConfig(({ mode }) => ({
           router: ['react-router-dom'],
           ui: ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu', '@radix-ui/react-toast'],
           icons: ['lucide-react'],
+         external: ['emailjs-com'],
+
         },
       },
     },
