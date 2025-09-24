@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import emailjs from '@emailjs/browser';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -114,6 +115,38 @@ const Checkout = () => {
 
       await createOrder(orderData);
 
+      // Send email notification to admin
+      try {
+        await emailjs.send(
+          'service_1uio42v', // Same service ID as contact form
+          'template_admin_order', // New template for admin notifications
+          {
+            customer_name: formData.name,
+            customer_email: formData.email || 'Non fourni',
+            customer_phone: formData.phone,
+            order_service: items.map(item => `${item.name} (x${item.quantity})`).join(', '),
+            order_total: total.toFixed(2),
+            payment_method: selectedPaymentMethod?.name,
+            customer_message: formData.message || 'Aucun message',
+            order_details: items.map(item => 
+              `- ${item.name} x${item.quantity} = ${(item.price * item.quantity).toFixed(2)} TND`
+            ).join('\n'),
+            order_date: new Date().toLocaleDateString('fr-FR', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit'
+            })
+          },
+          'LJ_unfpsEAuZj0EhN' // Same public key as contact form
+        );
+        
+        console.log('Admin notification email sent successfully');
+      } catch (emailError) {
+        console.error('Failed to send admin notification email:', emailError);
+        // Don't show error to customer as the order was still created successfully
+      }
       toast({
         title: "Commande confirmée !",
         description: "Votre commande a été enregistrée avec succès. Nous vous contacterons bientôt.",
