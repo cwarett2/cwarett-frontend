@@ -63,8 +63,8 @@ const Contact = () => {
 
     try {
       await emailjs.send(
-        'YOUR_SERVICE_ID', // 🔑 Replace with your EmailJS Service ID
-        'YOUR_TEMPLATE_ID', // 🔑 Replace with your EmailJS Template ID
+        'service_1uio42v', // 🔑 Replace with your EmailJS Service ID
+        'template_xvqwr9u', // 🔑 Replace with your EmailJS Template ID
         {
           from_name: formData.name,
           from_email: formData.email,
@@ -72,7 +72,7 @@ const Contact = () => {
           subject: formData.subject,
           message: formData.message,
         },
-        'YOUR_PUBLIC_KEY' // 🔑 Replace with your EmailJS Public Key
+        'LJ_unfpsEAuZj0EhN' // 🔑 Replace with your EmailJS Public Key
       );
 
       toast({
