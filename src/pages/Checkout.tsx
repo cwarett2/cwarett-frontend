@@ -119,7 +119,7 @@ const Checkout = () => {
       try {
         await emailjs.send(
           'service_1uio42v', // Same service ID as contact form
-          'template_admin_order', // New template for admin notifications
+          'template_gr6vd6u', // New template for admin notifications
           {
             customer_name: formData.name,
             customer_email: formData.email || 'Non fourni',
@@ -449,6 +449,7 @@ const Checkout = () => {
 };
 
 export default Checkout;
+
 
 
 
